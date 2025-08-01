@@ -3,6 +3,19 @@
 import streamlit as st
 import pandas as pd
 from datetime import datetime
+import gspread
+import json
+from oauth2client.service_account import ServiceAccountCredentials
+
+# Google Sheets auth
+scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
+
+creds_dict = json.loads(st.secrets["google"]["credentials"])
+creds = ServiceAccountCredentials.from_json_keyfile_dict(creds_dict, scope)
+client = gspread.authorize(creds)
+
+# Open sheet
+sheet = client.open("Your Sheet Name").sheet1
 
 st.set_page_config(page_title="Ranking Experiment", layout="centered")
 
@@ -41,8 +54,8 @@ with st.form("ranking_form"):
     submitted = st.form_submit_button("Submit")
 
 if submitted:
-    df = pd.DataFrame(responses)
-    df["timestamp"] = datetime.now()
-    df.to_csv("responses.csv", mode="a", header=not pd.read_csv("responses.csv").empty if "responses.csv" in df else True, index=False)
-    st.success("Thank you! Your responses have been recorded.")
+    # Append rows
+    for response in responses:
+        sheet.append_row(list(response.values()))
+
 

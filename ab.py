@@ -15,7 +15,7 @@ creds = ServiceAccountCredentials.from_json_keyfile_dict(creds_dict, scope)
 client = gspread.authorize(creds)
 
 # Open sheet
-sheet = client.open("Your Sheet Name").sheet1
+sheet = client.open("ABTest").sheet1
 
 st.set_page_config(page_title="Ranking Experiment", layout="centered")
 

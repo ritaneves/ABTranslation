@@ -17,6 +17,19 @@ client = gspread.authorize(creds)
 # Open sheet
 sheet = client.open("ABTest").sheet1
 
+# Setup
+NUM_QUESTIONS = 20
+NUM_OPTIONS = 4
+SCORE_VALUES = [0, 1, 2]
+
+if sheet.row_count == 0:
+    header = []
+    for q in range(1, NUM_QUESTIONS + 1):
+        for o in range(1, 5):
+            header.append(f"Q{q}O{o}")
+        header.append(f"Q{q}_Comment")
+    sheet.append_row(["Timestamp"] + header)
+
 st.set_page_config(page_title="Ranking Experiment", layout="centered")
 
 st.title("Marking LLM Translations of Short Sentences")
@@ -28,10 +41,7 @@ Each question has four options — your task is to **assign a score (0 to 2)** t
 Your responses will help us evaluate human preferences.
 """)
 
-# Setup
-NUM_QUESTIONS = 20
-NUM_OPTIONS = 4
-SCORE_VALUES = [0, 1, 2]
+
 
 # UI
 st.title("Detailed Option Ranking Survey")
@@ -66,7 +76,8 @@ if st.button("Submit"):
         st.error("Please fill in all option scores before submitting.")
     else:
         timestamp = datetime.now().isoformat()
-        row = [timestamp] + answers
+        cleaned_answers = [a if a is not None else "" for a in answers]
+        row = [timestamp] + cleaned_answers
         sheet.append_row(row)
         st.success("Your responses were submitted successfully!")
         st.balloons()

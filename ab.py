@@ -43,7 +43,7 @@ for q_num in range(1, NUM_QUESTIONS + 1):
     st.markdown(f"### Question {q_num}")
     q_scores = []
     for opt_num in range(1, NUM_OPTIONS + 1):
-        score = st.selectbox(
+        score = st.radio(
             f"Q{q_num} Option {opt_num} Score",
             SCORE_VALUES,
             key=f"q{q_num}_opt{opt_num}"

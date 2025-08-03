@@ -41,15 +41,21 @@ answers = []
 
 for q_num in range(1, NUM_QUESTIONS + 1):
     st.markdown(f"### Question {q_num}")
+    
+    cols = st.columns(4)
     q_scores = []
     for opt_num in range(1, NUM_OPTIONS + 1):
-        score = st.radio(
-            f"Q{q_num} Option {opt_num} Score",
-            SCORE_VALUES,
-            key=f"q{q_num}_opt{opt_num}"
-        )
-        q_scores.append(score)
-    comment = st.text_input(f"Optional comment for Q{q_num}", key=f"q{q_num}_comment")
+        with cols[opt_num - 1]:
+            score = st.radio(
+                f"Option {opt_num}",
+                SCORE_VALUES,
+                key=f"q{q_num}_opt{opt_num}",
+                horizontal=True,
+                label_visibility="collapsed"
+            )
+            q_scores.append(score)
+    
+    comment = st.text_input("Optional comment", key=f"q{q_num}_comment")
     answers.extend(q_scores)
     answers.append(comment.strip())
 

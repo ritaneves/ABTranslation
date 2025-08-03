@@ -28,34 +28,41 @@ Each question has four options — your task is to **assign a score (0 to 2)** t
 Your responses will help us evaluate human preferences.
 """)
 
-questions = [f"Question {i+1}: Lorem ipsum dolor sit amet?" for i in range(20)]
-options = ["Option A", "Option B", "Option C", "Option D"]
+# Setup
+NUM_QUESTIONS = 20
+NUM_OPTIONS = 4
+SCORE_VALUES = [0, 1, 2]
 
-responses = []
+# UI
+st.title("Detailed Option Ranking Survey")
+st.markdown("Please rate **each** option per question. Comments are optional. All scores are required.")
 
-with st.form("ranking_form"):
-    for q_idx, question in enumerate(questions):
-        st.markdown(f"### {question}")
-        scores = {}
-        cols = st.columns(4)
-        for i, opt in enumerate(options):
-            with cols[i]:
-                scores[opt] = st.selectbox(
-                    f"{opt} (0-2)", options=[0, 1, 2], key=f"q{q_idx}_opt{i}"
-                )
-        comment = st.text_input("Comment (optional)", key=f"q{q_idx}_comment")
+answers = []
 
-        responses.append({
-            "question": question,
-            **{f"{opt}_score": scores[opt] for opt in options},
-            "comment": comment
-        })
+for q_num in range(1, NUM_QUESTIONS + 1):
+    st.markdown(f"### Question {q_num}")
+    q_scores = []
+    for opt_num in range(1, NUM_OPTIONS + 1):
+        score = st.selectbox(
+            f"Q{q_num} Option {opt_num} Score",
+            SCORE_VALUES,
+            key=f"q{q_num}_opt{opt_num}"
+        )
+        q_scores.append(score)
+    comment = st.text_input(f"Optional comment for Q{q_num}", key=f"q{q_num}_comment")
+    answers.extend(q_scores)
+    answers.append(comment.strip())
 
-    submitted = st.form_submit_button("Submit")
-
-if submitted:
-    # Append rows
-    for response in responses:
-        sheet.append_row(list(response.values()))
+# Submit
+if st.button("Submit"):
+    # Validate all option scores are filled
+    if any(st.session_state.get(f"q{q}_opt{o}") is None for q in range(1, NUM_QUESTIONS+1) for o in range(1, NUM_OPTIONS+1)):
+        st.error("Please fill in all option scores before submitting.")
+    else:
+        timestamp = datetime.now().isoformat()
+        row = [timestamp] + answers
+        sheet.append_row(row)
+        st.success("Your responses were submitted successfully!")
+        st.balloons()
 
 

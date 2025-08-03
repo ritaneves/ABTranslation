@@ -22,12 +22,16 @@ NUM_QUESTIONS = 20
 NUM_OPTIONS = 4
 SCORE_VALUES = [0, 1, 2]
 
-if sheet.row_count == 0:
+existing_header = sheet.row_values(1)
+expected_columns = 1 + NUM_QUESTIONS * (NUM_OPTIONS + 1)  # 1 timestamp + 5 cols per Q
+
+if len(existing_header) < expected_columns:
     header = []
     for q in range(1, NUM_QUESTIONS + 1):
-        for o in range(1, 5):
+        for o in range(1, NUM_OPTIONS + 1):
             header.append(f"Q{q}O{o}")
         header.append(f"Q{q}_Comment")
+    sheet.clear()  # Optional: clears old junk if you’re testing
     sheet.append_row(["Timestamp"] + header)
 
 st.set_page_config(page_title="Ranking Experiment", layout="centered")

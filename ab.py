@@ -54,12 +54,13 @@ st.markdown("Please rate **each** option per question. Comments are optional. Al
 answers = []
 
 for q_num in range(1, NUM_QUESTIONS + 1):
-    st.markdown(f"### Question {q_num}")
+    st.markdown(f"Na yw'r symbol ar gyfer yr elfen")
     
     cols = st.columns(4)
     q_scores = []
     for opt_num in range(1, NUM_OPTIONS + 1):
         with cols[opt_num - 1]:
+            st.markdown(f"Na yw'r symbol ar gyfer yr elfen")
             score = st.radio(
                 f"Option {opt_num}",
                 SCORE_VALUES,

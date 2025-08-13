@@ -54,7 +54,7 @@ st.markdown("Please rate **each** option per question. Comments are optional. Al
 answers = []
 
 for q_num in range(1, NUM_QUESTIONS + 1):
-    st.markdown(f"Na yw'r symbol ar gyfer yr elfen")
+    st.markdown(f"ORIGINAL: Na yw'r symbol ar gyfer yr elfen")
     
     cols = st.columns(4)
     q_scores = []

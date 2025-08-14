@@ -60,7 +60,8 @@ st.title("Marking LLM Translations of Short Sentences")
 st.markdown("""
 Welcome! This experiment presents you with some translations of English into Welsh.  
 Each original sentence in English has 4 different translations — your task is to **assign a score (0 to 2)** to each one (0 is terrible and 2 is great), and optionally leave a **comment**.
-""")
+\n\n
+            """)
 
 answers = []
 for q_num in range(NUM_QUESTIONS):

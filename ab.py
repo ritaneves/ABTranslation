@@ -18,14 +18,14 @@ client = gspread.authorize(creds)
 sheet = client.open("ABTest").sheet1
 
 # Setup
-questions = ["Na is the symbol for which element", 
-             "Paraphrase this: As we discussed, printer is now working from the laptop.", \
-             "What is the scientific name for a Raccoon?", 
-             "Summarize this into a sentence", \
-             "Is Google pixel 8 screen flat or curve?", 
-             "Can planes not fly in smoke? Answer in 45 words or less.", \
-             "What is the first syllable of should've and the second syllable of told", 
-             "That's the best reason to celebrate! Wishing you a joyful moment of reflection and appreciation"]
+questions = ["'Na is the symbol for which element'", 
+             "'Paraphrase this: As we discussed, printer is now working from the laptop.'", \
+             "'What is the scientific name for a Raccoon?'", 
+             "'Summarize this into a sentence'", \
+             "'Is Google pixel 8 screen flat or curve?'", 
+             "'Can planes not fly in smoke? Answer in 45 words or less.'", \
+             "'What is the first syllable of should've and the second syllable of told'", 
+             "'That's the best reason to celebrate! Wishing you a joyful moment of reflection and appreciation'"]
 NUM_QUESTIONS = len(questions)
 
 all_answers = [["Na yw'r symbol ar gyfer yr elfen wich", "Na yw'r symbol ar gyfer yr elfen", "Na yw symbol pa elfen", "Ar gyfer pa elfen yw'r symbol Na?"], #m2m, nllb, oss, deepseek

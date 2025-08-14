@@ -19,7 +19,7 @@ sheet = client.open("ABTest").sheet1
 
 # Setup
 NUM_QUESTIONS = 20
-NUM_OPTIONS = 4
+NUM_OPTIONS = 3
 SCORE_VALUES = [0, 1, 2]
 
 existing_header = sheet.row_values(1)
@@ -56,7 +56,7 @@ answers = []
 for q_num in range(1, NUM_QUESTIONS + 1):
     st.markdown(f"ORIGINAL: Na yw'r symbol ar gyfer yr elfen")
     
-    cols = st.columns(4)
+    cols = st.columns(NUM_OPTIONS)
     q_scores = []
     for opt_num in range(1, NUM_OPTIONS + 1):
         with cols[opt_num - 1]:

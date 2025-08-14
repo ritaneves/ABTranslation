@@ -28,19 +28,18 @@ questions = ["ORIGINAL: Na is the symbol for which element",
              "ORIGINAL: That's the best reason to celebrate! Wishing you a joyful moment of reflection and appreciation"]
 NUM_QUESTIONS = len(questions)
 
-answers = [["Na yw'r symbol ar gyfer yr elfen", "Na yw symbol pa elfen", "Ar gyfer pa elfen yw'r symbol Na?"], #nllb, oss, deepseek
-           ["Parafrasewch hyn: Fel yr ydym wedi trafod, mae'r argraffydd bellach yn gweithio o'r laptop.", "Fel y buom yn trafod, mae’r printiwr wedi dechrau gweithio o’r gliniadur nawr.", "amgrynhoi hyn: Fel yr oeddem yn trafod, mae'r argraffydd bellach yn gweithio o'r gliniadur."], #nllb, deepseek, oss
-           ["Beth yw enw gwyddonol racŵn?", "Beth yw'r enw gwyddonol i Raccoon?", "Beth yw'r enw gwyddonol ar gyfer raccoon?"], # deepseek, nllb, oss
-           ["Crynhowch hyn i frawddeg", "cyfyngu hyn i fras", "Crynhowch hyn i un frawddeg."], # oss, nllb, deepseek
-           ["Ydy sgrîn Google Pixel 8 yn gwastad neu’n grom?", "Ydy sgrîn y Google Pixel 8 yn fflat neu'n grwm?", "A yw sgrin Google pixel 8 yn lân neu'n cwrw?"], # OSS, Deepseek, NLLB
-           ["A all awyrennau beidio â hedfan mewn mwgwd? Ateb mewn 45 gair neu lai.", "Oni all awyrennau hedfan mewn mwg? Atebwch mewn 45 o eiriau neu lai.", "Gall awyrennau beidio â hedfan mewn ysgafn?"], # OSS, Deepseek, NLLB
-           ["Beth yw'r cyfyng gyntaf o'r ddylai wedi a'r ail cyfyngiad o ddweud", "Beth yw sillaf gyntaf 'should've' a'r ail sillaf o 'told'?", "Beth yw'r sillaf cyntaf o should've a'r sillaf ail o told."], #nnlb, deepseek, oss
-           ["Dyna'r rheswm gorau i ddathlu! Dymunaf i chi funud llawen o fyfyrio a gwerthfawrogiad", "Dyma'r rheswm gorau i ddathlu!", "Dyna’r rheswm gorau i ddathlu! Dymuno cyfle llawen i fyfyrio a gwerthfawrogi i chi."], # oss, nllb, deepseek
+answers = [["Na yw'r symbol ar gyfer yr elfen wich", "Na yw'r symbol ar gyfer yr elfen", "Na yw symbol pa elfen", "Ar gyfer pa elfen yw'r symbol Na?"], #m2m, nllb, oss, deepseek
+           ["Parafrasewch hyn: Fel yr ydym wedi trafod, mae'r argraffydd bellach yn gweithio o'r laptop.", "Fel y buom yn trafod, mae’r printiwr wedi dechrau gweithio o’r gliniadur nawr.", "amgrynhoi hyn: Fel yr oeddem yn trafod, mae'r argraffydd bellach yn gweithio o'r gliniadur.", "ailadroddwch hyn: Fel y trafodon ni, mae'r argraffydd bellach yn gweithio o'r gliniadur."], #nllb, deepseek, oss, m2m
+           ["Beth yw enw gwyddonol racŵn?", "Beth yw enw gwyddonol racwn?", "Beth yw'r enw gwyddonol i Raccoon?", "Beth yw'r enw gwyddonol ar gyfer raccoon?"], # deepseek, m2m, nllb, oss
+           ["Crynhowch hyn i frawddeg", "cyfyngu hyn i fras", "Crynhowch hyn i un frawddeg.", "crynhoi hyn yn frawddeg"], # oss, nllb, deepseek, m2m
+           ["Ydy sgrîn Google Pixel 8 yn gwastad neu’n grom?", "Ydy sgrîn y Google Pixel 8 yn fflat neu'n grwm?", "A yw sgrîn Google pixel 8 yn fflat neu'n gorgyffwrdd?", "A yw sgrin Google pixel 8 yn lân neu'n cwrw?"], # OSS, Deepseek, m2m, NLLB
+           ["A all awyrennau beidio â hedfan mewn mwgwd? Ateb mewn 45 gair neu lai.", "A all awyrennau beidio â hedfan mewn mwg? Atebwch mewn 45 gair neu lai.", "Oni all awyrennau hedfan mewn mwg? Atebwch mewn 45 o eiriau neu lai.", "Gall awyrennau beidio â hedfan mewn ysgafn?"], # OSS, m2m, Deepseek, NLLB
+           ["Beth yw'r cyfyng gyntaf o'r ddylai wedi a'r ail cyfyngiad o ddweud", "Beth yw sillaf gyntaf 'should've' a'r ail sillaf o 'told'?", "Beth yw'r sillaf cyntaf o should've a'r sillaf ail o told.", "beth yw sillaf gyntaf y ddylid ei gael a'r ail sillaf o ddweud"], #nnlb, deepseek, oss, m2m
+           ["Dyma'r rheswm gorau i ddathlu! Dymunwn funud hapus o fyfyrio a gwerthfawrogi i chi", "Dyna'r rheswm gorau i ddathlu! Dymunaf i chi funud llawen o fyfyrio a gwerthfawrogiad", "Dyma'r rheswm gorau i ddathlu!", "Dyna’r rheswm gorau i ddathlu! Dymuno cyfle llawen i fyfyrio a gwerthfawrogi i chi."], # m2m, oss, nllb, deepseek
             ]
 
 
-
-NUM_OPTIONS = 3
+NUM_OPTIONS = len(answers[0])
 SCORE_VALUES = [0, 1, 2]
 
 existing_header = sheet.row_values(1)

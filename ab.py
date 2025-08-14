@@ -18,7 +18,30 @@ client = gspread.authorize(creds)
 sheet = client.open("ABTest").sheet1
 
 # Setup
-NUM_QUESTIONS = 20
+questions = ["ORIGINAL: Na is the symbol for which element", 
+             "ORIGINAL: Paraphrase this: As we discussed, printer is now working from the laptop.", \
+             "ORIGINAL: What is the scientific name for a Raccoon?", 
+             "ORIGINAL: Summarize this into a sentence", \
+             "ORIGINAL: Is Google pixel 8 screen flat or curve?", 
+             "ORIGINAL: Can planes not fly in smoke? Answer in 45 words or less.", \
+             "ORIGINAL: What is the first syllable of should've and the second syllable of told", 
+             "ORIGINAL: That's the best reason to celebrate! Wishing you a joyful moment of reflection and appreciation", \
+             "ORIGINAL: Here is a rewritten version of the text, condensed to approximately 50 words: 'This background examines the connections between video games and psychology. It is situated within broader academic and societal discussions, seeking to move beyond entertainment value and provide valuable insights that promote a well-informed and equitable understanding of video games' role in our lives and societies.'"]
+NUM_QUESTIONS = len(questions)
+
+answers = [["Na yw'r symbol ar gyfer yr elfen", "Na yw symbol pa elfen", "Ar gyfer pa elfen yw'r symbol Na?"], #nllb, oss, deepseek
+           ["Na yw'r symbol ar gyfer yr elfen", "Na yw symbol pa elfen", "Ar gyfer pa elfen yw'r symbol Na?"],
+           ["Na yw'r symbol ar gyfer yr elfen", "Na yw symbol pa elfen", "Ar gyfer pa elfen yw'r symbol Na?"],
+           ["Na yw'r symbol ar gyfer yr elfen", "Na yw symbol pa elfen", "Ar gyfer pa elfen yw'r symbol Na?"],
+           ["Na yw'r symbol ar gyfer yr elfen", "Na yw symbol pa elfen", "Ar gyfer pa elfen yw'r symbol Na?"],
+           ["Na yw'r symbol ar gyfer yr elfen", "Na yw symbol pa elfen", "Ar gyfer pa elfen yw'r symbol Na?"],
+           ["Na yw'r symbol ar gyfer yr elfen", "Na yw symbol pa elfen", "Ar gyfer pa elfen yw'r symbol Na?"],
+           ["Na yw'r symbol ar gyfer yr elfen", "Na yw symbol pa elfen", "Ar gyfer pa elfen yw'r symbol Na?"],
+           ["Na yw'r symbol ar gyfer yr elfen", "Na yw symbol pa elfen", "Ar gyfer pa elfen yw'r symbol Na?"],
+           ]
+
+
+
 NUM_OPTIONS = 3
 SCORE_VALUES = [0, 1, 2]
 
@@ -53,14 +76,15 @@ st.markdown("Please rate **each** option per question. Comments are optional. Al
 
 answers = []
 
+
 for q_num in range(1, NUM_QUESTIONS + 1):
-    st.markdown(f"ORIGINAL: Na yw'r symbol ar gyfer yr elfen")
+    st.markdown(questions[q_num])
     
     cols = st.columns(NUM_OPTIONS)
     q_scores = []
     for opt_num in range(1, NUM_OPTIONS + 1):
         with cols[opt_num - 1]:
-            st.markdown(f"Na yw'r symbol ar gyfer yr elfen")
+            st.markdown(answers[q_num][opt_num])
             score = st.radio(
                 f"Option {opt_num}",
                 SCORE_VALUES,

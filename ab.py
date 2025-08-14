@@ -28,7 +28,7 @@ questions = ["ORIGINAL: Na is the symbol for which element",
              "ORIGINAL: That's the best reason to celebrate! Wishing you a joyful moment of reflection and appreciation"]
 NUM_QUESTIONS = len(questions)
 
-answers = [["Na yw'r symbol ar gyfer yr elfen wich", "Na yw'r symbol ar gyfer yr elfen", "Na yw symbol pa elfen", "Ar gyfer pa elfen yw'r symbol Na?"], #m2m, nllb, oss, deepseek
+all_answers = [["Na yw'r symbol ar gyfer yr elfen wich", "Na yw'r symbol ar gyfer yr elfen", "Na yw symbol pa elfen", "Ar gyfer pa elfen yw'r symbol Na?"], #m2m, nllb, oss, deepseek
            ["Parafrasewch hyn: Fel yr ydym wedi trafod, mae'r argraffydd bellach yn gweithio o'r laptop.", "Fel y buom yn trafod, mae’r printiwr wedi dechrau gweithio o’r gliniadur nawr.", "amgrynhoi hyn: Fel yr oeddem yn trafod, mae'r argraffydd bellach yn gweithio o'r gliniadur.", "ailadroddwch hyn: Fel y trafodon ni, mae'r argraffydd bellach yn gweithio o'r gliniadur."], #nllb, deepseek, oss, m2m
            ["Beth yw enw gwyddonol racŵn?", "Beth yw enw gwyddonol racwn?", "Beth yw'r enw gwyddonol i Raccoon?", "Beth yw'r enw gwyddonol ar gyfer raccoon?"], # deepseek, m2m, nllb, oss
            ["Crynhowch hyn i frawddeg", "cyfyngu hyn i fras", "Crynhowch hyn i un frawddeg.", "crynhoi hyn yn frawddeg"], # oss, nllb, deepseek, m2m
@@ -39,7 +39,7 @@ answers = [["Na yw'r symbol ar gyfer yr elfen wich", "Na yw'r symbol ar gyfer yr
             ]
 
 
-NUM_OPTIONS = len(answers[0])
+NUM_OPTIONS = len(all_answers[0])
 SCORE_VALUES = [0, 1, 2]
 
 existing_header = sheet.row_values(1)
@@ -62,6 +62,7 @@ Welcome! This experiment presents you with some translations of English into Wel
 Each original sentence in English has 4 different translations — your task is to **assign a score (0 to 2)** to each one (0 is terrible and 2 is great), and optionally leave a **comment**.
 """)
 
+answers = []
 for q_num in range(NUM_QUESTIONS):
     st.markdown(questions[q_num])
     
@@ -69,7 +70,7 @@ for q_num in range(NUM_QUESTIONS):
     q_scores = []
     for opt_num in range(NUM_OPTIONS):
         with cols[opt_num - 1]:
-            st.markdown(answers[q_num][opt_num])
+            st.markdown(all_answers[q_num][opt_num])
             score = st.radio(
                 f"Option {opt_num}",
                 SCORE_VALUES,
@@ -84,12 +85,9 @@ for q_num in range(NUM_QUESTIONS):
     answers.append(comment.strip())
 
 # Submit
-cleaned_answers = []
 if st.button("Submit"):
     timestamp = datetime.now().isoformat()
-    for i in range(len(answers)):
-        for j in range(len(answers[0])):
-            cleaned_answers.append(f"{i}+{j}")
+    cleaned_answers = [a if a is not None else "" for a in answers]
     row = [timestamp] + cleaned_answers
     sheet.append_row(row)
     st.success("Your responses were submitted successfully!")

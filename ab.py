@@ -59,8 +59,7 @@ st.set_page_config(page_title="Ranking Experiment", layout="centered")
 st.title("Marking LLM Translations of Short Sentences")
 st.markdown("""
 Welcome! This experiment presents you with some translations of English into Welsh.  
-Each original sentence in English has 3 different translations — your task is to **assign a score (0 to 2)** to each one  
-(based on how good or bad you think it is), and optionally leave a **comment**.
+Each original sentence in English has 4 different translations — your task is to **assign a score (0 to 2)** to each one (0 is terrible and 2 is great), and optionally leave a **comment**.
 """)
 
 for q_num in range(NUM_QUESTIONS):

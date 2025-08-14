@@ -72,7 +72,7 @@ Your responses will help us evaluate human preferences.
 st.title("Detailed Option Ranking Survey")
 st.markdown("Please rate **each** option per question. Comments are optional. All scores are required.")
 
-for q_num in range(1, NUM_QUESTIONS + 1):
+for q_num in range(NUM_QUESTIONS):
     st.markdown(questions[q_num])
     
     cols = st.columns(NUM_OPTIONS)

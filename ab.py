@@ -85,13 +85,10 @@ for q_num in range(NUM_QUESTIONS):
 
 # Submit
 if st.button("Submit"):
-    # Validate all option scores are filled
-
     timestamp = datetime.now().isoformat()
     cleaned_answers = [a if a is not None else "" for a in answers]
     row = [timestamp] + cleaned_answers
     sheet.append_row(row)
     st.success("Your responses were submitted successfully!")
     st.balloons()
-
 

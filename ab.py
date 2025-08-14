@@ -84,9 +84,12 @@ for q_num in range(NUM_QUESTIONS):
     answers.append(comment.strip())
 
 # Submit
+cleaned_answers = []
 if st.button("Submit"):
     timestamp = datetime.now().isoformat()
-    cleaned_answers = [a if a is not None else "" for a in answers]
+    for i in range(len(answers)):
+        for j in range(len(answers[0])):
+            cleaned_answers.append(f"{i}+{j}")
     row = [timestamp] + cleaned_answers
     sheet.append_row(row)
     st.success("Your responses were submitted successfully!")

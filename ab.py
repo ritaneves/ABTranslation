@@ -25,20 +25,18 @@ questions = ["ORIGINAL: Na is the symbol for which element",
              "ORIGINAL: Is Google pixel 8 screen flat or curve?", 
              "ORIGINAL: Can planes not fly in smoke? Answer in 45 words or less.", \
              "ORIGINAL: What is the first syllable of should've and the second syllable of told", 
-             "ORIGINAL: That's the best reason to celebrate! Wishing you a joyful moment of reflection and appreciation", \
-             "ORIGINAL: Here is a rewritten version of the text, condensed to approximately 50 words: 'This background examines the connections between video games and psychology. It is situated within broader academic and societal discussions, seeking to move beyond entertainment value and provide valuable insights that promote a well-informed and equitable understanding of video games' role in our lives and societies.'"]
+             "ORIGINAL: That's the best reason to celebrate! Wishing you a joyful moment of reflection and appreciation"]
 NUM_QUESTIONS = len(questions)
 
 answers = [["Na yw'r symbol ar gyfer yr elfen", "Na yw symbol pa elfen", "Ar gyfer pa elfen yw'r symbol Na?"], #nllb, oss, deepseek
-           ["Na yw'r symbol ar gyfer yr elfen", "Na yw symbol pa elfen", "Ar gyfer pa elfen yw'r symbol Na?"],
-           ["Na yw'r symbol ar gyfer yr elfen", "Na yw symbol pa elfen", "Ar gyfer pa elfen yw'r symbol Na?"],
-           ["Na yw'r symbol ar gyfer yr elfen", "Na yw symbol pa elfen", "Ar gyfer pa elfen yw'r symbol Na?"],
-           ["Na yw'r symbol ar gyfer yr elfen", "Na yw symbol pa elfen", "Ar gyfer pa elfen yw'r symbol Na?"],
-           ["Na yw'r symbol ar gyfer yr elfen", "Na yw symbol pa elfen", "Ar gyfer pa elfen yw'r symbol Na?"],
-           ["Na yw'r symbol ar gyfer yr elfen", "Na yw symbol pa elfen", "Ar gyfer pa elfen yw'r symbol Na?"],
-           ["Na yw'r symbol ar gyfer yr elfen", "Na yw symbol pa elfen", "Ar gyfer pa elfen yw'r symbol Na?"],
-           ["Na yw'r symbol ar gyfer yr elfen", "Na yw symbol pa elfen", "Ar gyfer pa elfen yw'r symbol Na?"],
-           ]
+           ["Parafrasewch hyn: Fel yr ydym wedi trafod, mae'r argraffydd bellach yn gweithio o'r laptop.", "Fel y buom yn trafod, mae’r printiwr wedi dechrau gweithio o’r gliniadur nawr.", "amgrynhoi hyn: Fel yr oeddem yn trafod, mae'r argraffydd bellach yn gweithio o'r gliniadur."], #nllb, deepseek, oss
+           ["Beth yw enw gwyddonol racŵn?", "Beth yw'r enw gwyddonol i Raccoon?", "Beth yw'r enw gwyddonol ar gyfer raccoon?"], # deepseek, nllb, oss
+           ["Crynhowch hyn i frawddeg", "cyfyngu hyn i fras", "Crynhowch hyn i un frawddeg."], # oss, nllb, deepseek
+           ["Ydy sgrîn Google Pixel 8 yn gwastad neu’n grom?", "Ydy sgrîn y Google Pixel 8 yn fflat neu'n grwm?", "A yw sgrin Google pixel 8 yn lân neu'n cwrw?"], # OSS, Deepseek, NLLB
+           ["A all awyrennau beidio â hedfan mewn mwgwd? Ateb mewn 45 gair neu lai.", "Oni all awyrennau hedfan mewn mwg? Atebwch mewn 45 o eiriau neu lai.", "Gall awyrennau beidio â hedfan mewn ysgafn?"], # OSS, Deepseek, NLLB
+           ["Beth yw'r cyfyng gyntaf o'r ddylai wedi a'r ail cyfyngiad o ddweud", "Beth yw sillaf gyntaf 'should've' a'r ail sillaf o 'told'?", "Beth yw'r sillaf cyntaf o should've a'r sillaf ail o told."], #nnlb, deepseek, oss
+           ["Dyna'r rheswm gorau i ddathlu! Dymunaf i chi funud llawen o fyfyrio a gwerthfawrogiad", "Dyma'r rheswm gorau i ddathlu!", "Dyna’r rheswm gorau i ddathlu! Dymuno cyfle llawen i fyfyrio a gwerthfawrogi i chi."], # oss, nllb, deepseek
+            ]
 
 
 
@@ -61,16 +59,10 @@ st.set_page_config(page_title="Ranking Experiment", layout="centered")
 
 st.title("Marking LLM Translations of Short Sentences")
 st.markdown("""
-Welcome! This experiment presents you with 20 questions.  
-Each question has four options — your task is to **assign a score (0 to 2)** to each one  
+Welcome! This experiment presents you with some translations of English into Welsh.  
+Each original sentence in English has 3 different translations — your task is to **assign a score (0 to 2)** to each one  
 (based on how good or bad you think it is), and optionally leave a **comment**.
-
-Your responses will help us evaluate human preferences.
 """)
-
-# UI
-st.title("Detailed Option Ranking Survey")
-st.markdown("Please rate **each** option per question. Comments are optional. All scores are required.")
 
 for q_num in range(NUM_QUESTIONS):
     st.markdown(questions[q_num])

@@ -77,7 +77,7 @@ for q_num in range(NUM_QUESTIONS):
     
     cols = st.columns(NUM_OPTIONS)
     q_scores = []
-    for opt_num in range(1, NUM_OPTIONS + 1):
+    for opt_num in range(NUM_OPTIONS):
         with cols[opt_num - 1]:
             st.markdown(answers[q_num][opt_num])
             score = st.radio(

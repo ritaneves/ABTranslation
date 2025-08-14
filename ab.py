@@ -68,14 +68,9 @@ Each question has four options — your task is to **assign a score (0 to 2)** t
 Your responses will help us evaluate human preferences.
 """)
 
-
-
 # UI
 st.title("Detailed Option Ranking Survey")
 st.markdown("Please rate **each** option per question. Comments are optional. All scores are required.")
-
-answers = []
-
 
 for q_num in range(1, NUM_QUESTIONS + 1):
     st.markdown(questions[q_num])
